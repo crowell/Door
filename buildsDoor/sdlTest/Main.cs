@@ -34,6 +34,8 @@ public class SDL
     //begin functions
     public static void Main(string[] args)
     {
+        //init the stringbuilder
+        mID2 = new StringBuilder();
         //args are the image(s) to load
         mBackgroundPath = args[0];
         mForegroundPath = args[1];
@@ -51,8 +53,8 @@ public class SDL
         //select the font
         mFont = new SdlDotNet.Graphics.Font(@"font.ttf", 48);
         //set up the screen dimensions
-        mVideoScreen = Video.SetVideoMode(1366/*width*/, 768/*height*/, false /*resize*/,
-            false /*opengl*/, true /*fullscreen*/);
+        mVideoScreen = Video.SetVideoMode(1000/*width*/, 600/*height*/, false /*resize*/,
+            false /*opengl*/, false /*fullscreen*/);
         
         //load the images or quit if they can't be loaded
         if (!LoadImages(mBackgroundPath, mForegroundPath)) Environment.Exit(1); //try to load the images, if cant, die
@@ -72,7 +74,7 @@ public class SDL
         
         //if (!LoadImages(mBackgroundPath, mForegroundPath)) Environment.Exit(1); //try to load the images, if cant, die
         mVideoScreen.Blit(mBackground);
-        PrintWelcomeMessage();
+     //   PrintWelcomeMessage();
         mVideoScreen.Update();
     }
     private static string GetArduinoSerial()
@@ -141,6 +143,11 @@ public class SDL
         if (args.Key == Key.KeypadEnter)
         {
             ResetScreen();
+            DispSDLText(mVideoScreen, "HELLO WORLD", -1, 300);
+            mVideoScreen.Update();
+            SdlDotNet.Core.Timer.DelaySeconds(5); //delay so to show the animation
+            ResetScreen();
+            PrintWelcomeMessage();
         }
         else if (args.Key == Key.Escape)
         {
@@ -149,7 +156,8 @@ public class SDL
         }
         else if (args.EventStruct.key.keysym.scancode != 0x24)
         {
-            mID2.Append(args.KeyboardCharacter);
+            string str = args.KeyboardCharacter.ToString();
+            mID2.Append(args.KeyboardCharacter.ToString());
         }
 
         else
