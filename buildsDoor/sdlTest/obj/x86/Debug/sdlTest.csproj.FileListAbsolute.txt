@@ -1,0 +1,5 @@
+C:\Users\jeff\Documents\Projects\sdlTest\sdlTest\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\jeff\Documents\Projects\sdlTest\sdlTest\bin\Debug\sdlTest.exe
+C:\Users\jeff\Documents\Projects\sdlTest\sdlTest\bin\Debug\sdlTest.pdb
+C:\Users\jeff\Documents\Projects\sdlTest\sdlTest\obj\x86\Debug\sdlTest.exe
+C:\Users\jeff\Documents\Projects\sdlTest\sdlTest\obj\x86\Debug\sdlTest.pdb

@@ -1,0 +1,5 @@
+C:\Users\jeff\Documents\Projects\sdlTest\sdlTest\bin\Debug\buildsDoor.exe
+C:\Users\jeff\Documents\Projects\sdlTest\sdlTest\bin\Debug\buildsDoor.pdb
+C:\Users\jeff\Documents\Projects\sdlTest\sdlTest\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\jeff\Documents\Projects\sdlTest\sdlTest\obj\x86\Debug\buildsDoor.exe
+C:\Users\jeff\Documents\Projects\sdlTest\sdlTest\obj\x86\Debug\buildsDoor.pdb
