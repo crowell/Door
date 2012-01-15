@@ -67,10 +67,12 @@ public class SDL
     }
     private static void ResetScreen()
     {
-        mVideoScreen = Video.SetVideoMode(1366/*width*/, 768/*height*/, false /*resize*/,
-            false /*opengl*/, true /*fullscreen*/);
+        //mVideoScreen = Video.SetVideoMode(1366/*width*/, 768/*height*/, false /*resize*/,
+        //    false /*opengl*/, true /*fullscreen*/);
         
-        if (!LoadImages(mBackgroundPath, mForegroundPath)) Environment.Exit(1); //try to load the images, if cant, die
+        //if (!LoadImages(mBackgroundPath, mForegroundPath)) Environment.Exit(1); //try to load the images, if cant, die
+        mVideoScreen.Blit(mBackground);
+        PrintWelcomeMessage();
         mVideoScreen.Update();
     }
     private static string GetArduinoSerial()
@@ -80,7 +82,7 @@ public class SDL
         if (ports.Length == 0) return null; //no connected serials
         foreach (string port in ports)
         {
-            System.Console.WriteLine(index + " : " + port);
+            System.Console.WriteLine(index++ + " : " + port);
         }
         if (Int32.TryParse(System.Console.ReadLine(), out index))
         {
@@ -89,8 +91,7 @@ public class SDL
                 return ports[index];
             }
         }
-        GetArduinoSerial();
-        return "impossible to get here";
+        return GetArduinoSerial();
     }
     private static bool ConnectToArduino(string arduino)
     {
@@ -134,33 +135,23 @@ public class SDL
         mVideoScreen.Blit(mBackground);
         return true;
     }
-    private static void Events_KeyboardDown(object sender, SdlDotNet.Input.KeyboardEventArgs args)
-    {
-        switch (args.Key)
-        {
-            case Key.DownArrow:
-                {
-                    break;
-                }
-            case Key.UpArrow:
-                {
-                    ResetScreen();
-                    break;
-                }
-            case Key.Escape:
-                {
-                    System.Console.WriteLine("Escape pressed, Quitting");
-                    Environment.Exit(0);
-                    break;
-                }
-        }
-    }
+
     private static void Events_KeyboardUp(object sender, KeyboardEventArgs args)
     {
-        if (args.EventStruct.key.keysym.scancode != 0x24)
+        if (args.Key == Key.KeypadEnter)
+        {
+            ResetScreen();
+        }
+        else if (args.Key == Key.Escape)
+        {
+            System.Console.WriteLine("Escape pressed, Quitting");
+            Environment.Exit(0);
+        }
+        else if (args.EventStruct.key.keysym.scancode != 0x24)
         {
             mID2.Append(args.KeyboardCharacter);
         }
+
         else
         {
             string id = mID2.ToString();
@@ -212,7 +203,7 @@ public class SDL
                 catch (Exception ex)
                 {
                     System.Console.WriteLine(ex.ToString());
-                }                
+                }
             }
             catch (Exception ex)
             {
